@@ -1,0 +1,24 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/uFU4ItwbxHnFHxntb76ASnZbWTN.jpg",
+      "id": 136248,
+      "name": "Tales of the Walking Dead",
+      "original_language": "en",
+      "original_name": "Tales of the Walking Dead",
+      "overview": "Six original one-hour standalone episodes focused on both new and established characters within the walker apocalypse. Each episode has its own distinct tone and point of view — but the stakes are high in each story, pushing new, indelible characters with relentless, life-threatening choices and situations. We get to see the apocalypse through different eyes, discovering more worlds, mythos, and mysteries of the Walking Dead.",
+      "poster_path": "/zRMUHvTgQ79zteQafNI46Nd9XFm.jpg",
+      "media_type": "tv",
+      "genre_ids": [18, 10759, 10765],
+      "popularity": 997.07,
+      "first_air_date": "2022-08-14",
+      "vote_average": 7.674,
+      "vote_count": 23,
+      "origin_country": ["US"]
+    }
+  ],
+  "total_pages": 1,
+  "total_results": 15
+}
