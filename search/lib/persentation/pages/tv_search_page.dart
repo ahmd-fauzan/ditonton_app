@@ -1,10 +1,8 @@
 import 'package:core/styles/text_style.dart';
-import 'package:core/utils/constants.dart';
-import 'package:core/utils/state_enum.dart';
-import 'package:core/presentation/widgets/tv_widget/tv_card_list.dart';
+import 'package:tv_series/presentation/widgets/tv_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:search/persentation/provider/tv_search_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/persentation/bloc/search_bloc.dart';
 
 class TVSearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search-tv';
@@ -21,30 +19,29 @@ class TVSearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TVSearchNotifier>(context, listen: false)
-                    .fetchTVSearch(query);
+              onChanged: (query) {
+                context.read<TVSearchBloc>().add(OnQueryChanged(query));
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TVSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return Center(
+            BlocBuilder<TVSearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state is SearchLoading) {
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.saerchResult;
+                } else if (state is TVSearchHasData) {
+                  final result = state.result;
                   return Expanded(
                     child: ListView.builder(
                       itemCount: result.length,
@@ -54,11 +51,14 @@ class TVSearchPage extends StatelessWidget {
                       },
                     ),
                   );
-                } else {
+                } else if (state is SearchError) {
                   return Expanded(
-                    child: Container(),
+                    child: SizedBox(
+                      child: Text(state.message),
+                    ),
                   );
                 }
+                return Container();
               },
             ),
           ],

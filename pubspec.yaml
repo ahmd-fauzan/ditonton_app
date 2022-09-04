@@ -37,6 +37,7 @@ dependencies:
   get_it: ^7.1.3
   sqflite: ^2.0.0+3
   path_provider: ^2.0.2
+  flutter_bloc: ^8.1.1
 
   about:
     path: about
@@ -44,6 +45,10 @@ dependencies:
     path: core
   search:
     path: search
+  movie:
+    path: movie
+  tv_series:
+    path: tv_series
 
 dev_dependencies:
   mockito: ^5.0.8
@@ -64,6 +69,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - certificates/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
